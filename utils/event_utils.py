@@ -20,6 +20,8 @@ def events_to_image_torch(xs, ys, ps, device=None, sensor_size=(180, 240)):
         xs = xs.long().to(device)
     if ys.dtype is not torch.long:
         ys = ys.long().to(device)
+    print(ys.max())
+    print(xs.max())
     img.index_put_((ys, xs), ps, accumulate=True)
     return img
 
