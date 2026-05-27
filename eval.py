@@ -126,35 +126,52 @@ def get_model_from_checkpoint_path(model_name, checkpoint_path):
     Instantiate a PyTorch model class from a given model name and checkpoint path. According to the model name,
     each checkpoint is parsed and each model class is instantiated with the correct parameters.
     """
+    import pathlib
+    temp = pathlib.PosixPath
+    pathlib.PosixPath = pathlib.WindowsPath
     checkpoint = torch.load(checkpoint_path, device)
-    if model_name == "SPADE-E2VID":
-        model = model_arch.SpadeE2vid()
+    if model_name == "EVSNN":
+        network_kwargs = {'activation_type': 'lif',
+                      'mp_activation_type': 'amp_lif',
+                      'spike_connection': 'concat',
+                      'num_encoders': 3,
+                      'num_resblocks': 1,
+                      'v_threshold': 1.0,
+                      'v_reset': None,
+                      'tau': 2.0
+                      }
+        model = model_arch.EVSNN_LIF_final(kwargs = network_kwargs).to(device)
+        model.load(checkpoint_path)
         model.num_encoders = 3
-        state_dict = checkpoint
-    elif model_name == "SSL-E2VID":
-        unet_kwargs = {"base_num_channels": 32, "kernel_size": 5, "num_bins": 5, "num_encoders": 3,
-                       "recurrent_block_type": "convlstm", "num_residual_blocks": 2, "skip_type": "sum", "norm": None,
-                       "use_upsample_conv": True}
-        model = model_arch.E2VIDRecurrent(unet_kwargs)
-        state_dict = checkpoint
     else:
-        if model_name == "E2VID":
-            unet_kwargs = checkpoint['model']
-            unet_kwargs['final_activation'] = 'sigmoid'
+        if model_name == "SPADE-E2VID":
+            model = model_arch.SpadeE2vid()
+            model.num_encoders = 3
+            state_dict = checkpoint
+        elif model_name == "SSL-E2VID":
+            unet_kwargs = {"base_num_channels": 32, "kernel_size": 5, "num_bins": 5, "num_encoders": 3,
+                        "recurrent_block_type": "convlstm", "num_residual_blocks": 2, "skip_type": "sum", "norm": None,
+                        "use_upsample_conv": True}
             model = model_arch.E2VIDRecurrent(unet_kwargs)
-        elif model_name == "FireNet":
-            unet_kwargs = checkpoint['config']['model']
-            unet_kwargs['final_activation'] = ''
-            model = model_arch.FireNet_legacy(unet_kwargs)
+            state_dict = checkpoint
         else:
-            config = checkpoint['config']
-            model = config.init_obj('arch', model_arch)
-            if model_name == "ET-Net":
-                model.num_encoders = 3
-            elif model_name == "FireNet+":
-                model.num_encoders = 0
-        state_dict = checkpoint['state_dict']
-    model = load_model(model, state_dict)
+            if model_name == "E2VID":
+                unet_kwargs = checkpoint['model']
+                unet_kwargs['final_activation'] = 'sigmoid'
+                model = model_arch.E2VIDRecurrent(unet_kwargs)
+            elif model_name == "FireNet":
+                unet_kwargs = checkpoint['config']['model']
+                unet_kwargs['final_activation'] = ''
+                model = model_arch.FireNet_legacy(unet_kwargs)
+            else:
+                config = checkpoint['config']
+                model = config.init_obj('arch', model_arch)
+                if model_name == "ET-Net":
+                    model.num_encoders = 3
+                elif model_name == "FireNet+":
+                    model.num_encoders = 0
+            state_dict = checkpoint['state_dict']
+        model = load_model(model, state_dict)
     return model
 
 
@@ -224,8 +241,9 @@ def eval_method_on_sequence(dataset_name, eval_config, method_name, model, metho
         voxel = voxel.to(device)
         if not color:
             voxel = cropper.pad(voxel)
+        input = item['events'] if type(model) == model_arch.EVSNN_LIF_final else voxel
         with CudaTimer(method_name):
-            output = model(voxel)
+            output = model(input)
         if not color:
             image = cropper.crop(output['image'])
         else:
@@ -255,8 +273,10 @@ class MetricTracker:
         self.data_dict[key]['total'] = 0.0
         self.data_dict[key]['count'] = 0
         self.data_dict[key]['average'] = 0.0
+        self.data_dict[key]['values'] = []
+        self.data_dict[key]['keys'] = []
 
-    def update(self, key, value, count=1):
+    def update(self, key, value, count=1, sequence_name="None"):
         if count == 0:
             return
         if key not in self.data_dict:
@@ -264,6 +284,8 @@ class MetricTracker:
         self.data_dict[key]['total'] += value * count
         self.data_dict[key]['count'] += count
         self.data_dict[key]['average'] = self.data_dict[key]['total'] / self.data_dict[key]['count']
+        self.data_dict[key]['values'].append(value)
+        self.data_dict[key]['keys'].append(sequence_name)
 
     def get_average(self, key):
         if key not in self.data_dict:
@@ -274,6 +296,18 @@ class MetricTracker:
         if key not in self.data_dict:
             self.init_key(key)
         return self.data_dict[key]['count']
+    
+    def get_values(self, key):
+        if key not in self.data_dict:
+            self.init_key(key)
+        return self.data_dict[key]['values']
+    
+    def get_keys(self, key):
+        if key not in self.data_dict:
+            self.init_key(key)
+        return self.data_dict[key]['keys']
+    
+    
 
 
 def print_scores(all_metrics, method_names, dataset_names, config_name):
@@ -281,6 +315,7 @@ def print_scores(all_metrics, method_names, dataset_names, config_name):
     Prints all the scores for an eval config, in a table format.
     """
     scores_table = []
+    sequences = []
     headers = ["\nMethod"]
     for method_name, method_metrics in zip(method_names, all_metrics):
         weighted_averages = []
@@ -291,8 +326,12 @@ def print_scores(all_metrics, method_names, dataset_names, config_name):
                     headers.append(dataset_name + f' ({num_eval})' + "\n" + metric.upper())
                 else:
                     headers.append("\n" + metric.upper())
+                sequences = dataset_metrics.get_keys(metric)
+                # print(dataset_metrics.data_dict)
                 weighted_average_score = dataset_metrics.get_average(metric)
                 weighted_averages.append(weighted_average_score)
+        # scores_table.append([dataset_metrics.get_keys(metric)])
+        # scores_table.append([method_name] + dataset_metrics.get_values(metric) + weighted_averages)
         scores_table.append([method_name] + weighted_averages)
         # weighted_averages = (['{:.5f}'.format(x) for x in weighted_averages])
         # weighted_averages = ','.join(weighted_averages)
@@ -300,6 +339,7 @@ def print_scores(all_metrics, method_names, dataset_names, config_name):
     print('')
     print(chalk.underline(color_scores(f'Image Quality Scores (for {config_name} config)')))
     print(color_scores(tabulate(scores_table, headers=headers, floatfmt=".3f")))
+    print(sequences)
     print('')
 
 
@@ -341,6 +381,7 @@ def eval_method_with_config(eval_config, method_name, datasets, metrics):
     model_name = method_config['model_name']
     color = eval_config.get('color', False)
     method_metrics = []
+    print(color_progress(checkpoint_path))
     try:
         model = get_model_from_checkpoint_path(model_name, checkpoint_path)
         if color:
@@ -365,7 +406,7 @@ def eval_method_with_config(eval_config, method_name, datasets, metrics):
                 num_evaluated, mean_scores = results
                 sequence_no += 1
                 for metric_name, score in mean_scores.items():
-                    dataset_metrics.update(metric_name, score, num_evaluated)
+                    dataset_metrics.update(metric_name, score, num_evaluated, sequence_name=sequence['name'])
         except Exception as e:
             print(color_error(f"Exception while evaluating method {method_name} on {dataset['name']} dataset:"))
             print(color_error(e))
