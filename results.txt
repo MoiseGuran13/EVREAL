@@ -1,0 +1,339 @@
+Image Quality Scores (for std config)
+              HQF (15499)
+Method                MSE    SSIM    LPIPS
+----------  -------------  ------  -------
+E2VID               0.099   0.462    0.388
+HyperE2VID          0.032   0.531    0.260
+
+== Timing statistics ==
+E2VID: 19.23 ms (15499 samples)
+HyperE2VID: 25.40 ms (15499 samples)
+
+
+Image Quality Scores (for std config)
+              ECD (1855)
+Method               MSE    SSIM    LPIPS
+----------  ------------  ------  -------
+E2VID              0.179   0.450    0.322
+HyperE2VID         0.033   0.576    0.212
+
+== Timing statistics ==
+E2VID: 20.24 ms (2555 samples)
+HyperE2VID: 25.79 ms (2555 samples)
+
+
+Image Quality Scores (for color config)
+
+Method
+----------
+E2VID
+HyperE2VID
+
+== Timing statistics ==
+E2VID: 56.12 ms (2555 samples)
+HyperE2VID: 78.31 ms (2555 samples)
+
+
+Image Quality Scores (for std config)
+               ECD (1855)
+Method                MSE    SSIM    LPIPS
+-----------  ------------  ------  -------
+SPADE-E2VID         0.091   0.461    0.337
+
+
+
+Image Quality Scores (for std config)
+               ECD (1855)                     HQF (15499)
+Method                MSE    SSIM    LPIPS            MSE    SSIM    LPIPS
+-----------  ------------  ------  -------  -------------  ------  -------
+E2VID               0.179   0.450    0.322          0.099   0.462    0.388
+E2VID+              0.070   0.503    0.236          0.037   0.536    0.255
+FireNet             0.133   0.459    0.321          0.100   0.422    0.463
+FireNet+            0.062   0.452    0.289          0.044   0.474    0.320
+SPADE-E2VID         0.091   0.461    0.337          0.079   0.405    0.514
+SSL-E2VID           0.092   0.415    0.380          0.090   0.407    0.496
+ET-Net              0.047   0.552    0.224          0.034   0.534    0.268
+HyperE2VID          0.033   0.576    0.212          0.032   0.531    0.260
+
+== Timing statistics ==
+E2VID: 18.32 ms (18054 samples)
+E2VID+: 17.12 ms (18054 samples)
+FireNet: 12.65 ms (18054 samples)
+FireNet+: 10.54 ms (18054 samples)
+SPADE-E2VID: 55.12 ms (18054 samples)
+SSL-E2VID: 17.29 ms (18054 samples)
+ET-Net: 91.41 ms (18054 samples)
+HyperE2VID: 25.59 ms (18054 samples)
+
+
+
+Image Quality Scores (for std config)
+              BS_ERGB_handheld (4591)
+Method                            MSE    SSIM    LPIPS
+----------  -------------------------  ------  -------
+E2VID                           0.139   0.324    0.569
+E2VID+                          0.076   0.374    0.433
+FireNet                         0.097   0.330    0.535
+FireNet+                        0.091   0.318    0.482
+SSL-E2VID                       0.088   0.349    0.628
+ET-Net
+HyperE2VID
+
+== Timing statistics ==
+E2VID: 237.46 ms (4591 samples)
+E2VID+: 233.45 ms (4591 samples)
+FireNet: 79.21 ms (4591 samples)
+FireNet+: 83.54 ms (4591 samples)
+SSL-E2VID: 233.65 ms (4591 samples)
+
+
+Image Quality Scores (for std config)
+               MVSEC_night (9418)
+Method                        MSE    SSIM    LPIPS
+-----------  --------------------  ------  -------
+E2VID                       0.200   0.106    0.590
+E2VID+                      0.127   0.071    0.602
+FireNet                     0.134   0.079    0.634
+FireNet+                    0.045   0.105    0.532
+SPADE-E2VID                 0.094   0.088    0.619
+SSL-E2VID                   0.175   0.082    0.650
+ET-Net                      0.045   0.114    0.510
+HyperE2VID                  0.046   0.112    0.506
+
+== Timing statistics ==
+E2VID: 31.18 ms (9418 samples)
+E2VID+: 28.87 ms (9418 samples)
+FireNet: 19.42 ms (9418 samples)
+FireNet+: 17.68 ms (9418 samples)
+SPADE-E2VID: 110.42 ms (9418 samples)
+SSL-E2VID: 28.49 ms (9418 samples)
+ET-Net: 180.17 ms (9418 samples)
+HyperE2VID: 48.88 ms (9418 samples)
+
+
+
+Image Quality Scores (for std config)
+               ECD (1855)
+Method                MSE    SSIM    LPIPS
+-----------  ------------  ------  -------
+E2VID               0.179   0.450    0.322
+E2VID+              0.070   0.503    0.236
+FireNet             0.133   0.459    0.321
+FireNet+            0.062   0.452    0.289
+SPADE-E2VID         0.091   0.461    0.337
+SSL-E2VID           0.092   0.415    0.380
+ET-Net              0.047   0.552    0.224
+HyperE2VID          0.033   0.576    0.212
+
+== Timing statistics ==
+E2VID: 23.48 ms (2555 samples)
+E2VID+: 20.66 ms (2555 samples)
+FireNet: 15.91 ms (2555 samples)
+FireNet+: 14.33 ms (2555 samples)
+SPADE-E2VID: 54.21 ms (2555 samples)
+SSL-E2VID: 18.76 ms (2555 samples)
+ET-Net: 63.43 ms (2555 samples)
+HyperE2VID: 24.95 ms (2555 samples)
+
+
+
+Image Quality Scores (for std config)
+               HQF (15499)
+Method                 MSE    SSIM    LPIPS
+-----------  -------------  ------  -------
+E2VID                0.099   0.462    0.388
+E2VID+               0.037   0.536    0.255
+FireNet              0.100   0.422    0.463
+FireNet+             0.044   0.474    0.320
+SPADE-E2VID          0.079   0.405    0.514
+SSL-E2VID            0.090   0.407    0.496
+ET-Net               0.034   0.534    0.268
+HyperE2VID           0.032   0.531    0.260
+
+== Timing statistics ==
+E2VID: 23.22 ms (15499 samples)
+E2VID+: 18.84 ms (15499 samples)
+FireNet: 15.56 ms (15499 samples)
+FireNet+: 14.54 ms (15499 samples)
+SPADE-E2VID: 54.23 ms (15499 samples)
+SSL-E2VID: 18.37 ms (15499 samples)
+ET-Net: 62.94 ms (15499 samples)
+HyperE2VID: 25.18 ms (15499 samples)
+
+
+
+Image Quality Scores (for std_all config)
+               ECD (1855)
+Method                MSE
+-----------  ------------
+E2VID               0.179
+E2VID+              0.070
+FireNet             0.133
+FireNet+            0.062
+SPADE-E2VID         0.091
+SSL-E2VID           0.092
+ET-Net              0.047
+HyperE2VID          0.033
+
+== Timing statistics ==
+E2VID: 16.66 ms (7031 samples)
+E2VID+: 16.48 ms (7031 samples)
+FireNet: 8.61 ms (7031 samples)
+FireNet+: 6.56 ms (7031 samples)
+SPADE-E2VID: 54.16 ms (7031 samples)
+SSL-E2VID: 16.49 ms (7031 samples)
+ET-Net: 58.64 ms (7031 samples)
+HyperE2VID: 24.76 ms (7031 samples)
+
+
+
+Image Quality Scores (for std_all config)
+               ECD (1855)    ECD (1855)    ECD (1855)    ECD (1855)    ECD (1855)    ECD (1855)    ECD (1855)
+Method                MSE           MSE           MSE           MSE           MSE           MSE           MSE
+-----------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
+E2VID               0.088         0.068         0.276         0.126         0.168         0.320         0.212
+E2VID+              0.031         0.041         0.142         0.040         0.070         0.089         0.042
+FireNet             0.093         0.066         0.230         0.109         0.136         0.156         0.118
+FireNet+            0.023         0.025         0.139         0.018         0.053         0.097         0.047
+SPADE-E2VID         0.083         0.056         0.154         0.062         0.112         0.064         0.107
+SSL-E2VID           0.048         0.068         0.093         0.029         0.114         0.164         0.092
+ET-Net              0.037         0.013         0.132         0.031         0.041         0.025         0.024
+HyperE2VID          0.023         0.011         0.089         0.014         0.035         0.019         0.029
+
+== Timing statistics ==
+E2VID: 16.93 ms (7031 samples)
+E2VID+: 17.28 ms (7031 samples)
+FireNet: 6.51 ms (7031 samples)
+FireNet+: 5.94 ms (7031 samples)
+SPADE-E2VID: 53.88 ms (7031 samples)
+SSL-E2VID: 16.62 ms (7031 samples)
+ET-Net: 58.82 ms (7031 samples)
+HyperE2VID: 24.73 ms (7031 samples)
+
+
+
+Image Quality Scores (for std_all config)
+                                                            HQF (15499)    HQF (15499)    HQF (15499)    HQF (15499)    HQF (15499)    HQF (15499)    HQF (15499)    HQF (15499)
+                                                  Method            MSE            MSE            MSE            MSE            MSE            MSE            MSE            MSE
+-----------  -----  -----  -----  -----  -----  --------  -------------  -------------  -------------  -------------  -------------  -------------  -------------  -------------
+E2VID        0.125  0.061  0.075  0.073  0.086     0.108          0.073          0.080          0.137          0.123          0.072          0.120          0.109          0.080
+E2VID+       0.036  0.049  0.028  0.032  0.045     0.038          0.042          0.026          0.032          0.026          0.040          0.041          0.048          0.038
+FireNet      0.093  0.080  0.110  0.087  0.105     0.115          0.081          0.090          0.102          0.128          0.073          0.112          0.140          0.076
+FireNet+     0.036  0.048  0.043  0.039  0.065     0.084          0.034          0.039          0.030          0.059          0.055          0.037          0.048          0.033
+SPADE-E2VID  0.072  0.094  0.088  0.079  0.080     0.084          0.075          0.063          0.069          0.065          0.073          0.089          0.090          0.082
+SSL-E2VID    0.069  0.060  0.103  0.087  0.116     0.172          0.082          0.066          0.098          0.088          0.055          0.092          0.100          0.058
+ET-Net       0.032  0.040  0.039  0.035  0.055     0.045          0.039          0.022          0.016          0.018          0.055          0.025          0.035          0.033
+HyperE2VID   0.036  0.050  0.028  0.029  0.042     0.029          0.041          0.021          0.019          0.018          0.059          0.025          0.033          0.034
+['bike_bay_hdr', 'boxes', 'desk', 'desk_fast', 'desk_hand_only', 'desk_slow', 'engineering_posters', 'high_texture_plants', 'poster_pillar_1', 'poster_pillar_2', 'reflective_materials', 'slow_and_fast_desk', 'slow_hand', 'still_life']
+
+== Timing statistics ==
+E2VID: 16.49 ms (15499 samples)
+E2VID+: 16.45 ms (15499 samples)
+FireNet: 5.85 ms (15499 samples)
+FireNet+: 5.45 ms (15499 samples)
+SPADE-E2VID: 53.90 ms (15499 samples)
+SSL-E2VID: 16.52 ms (15499 samples)
+
+
+
+Image Quality Scores (for std_all config)
+               MVSEC_night (9418)    MVSEC_night (9418)    MVSEC_night (9418)
+Method                        MSE                   MSE                   MSE
+-----------  --------------------  --------------------  --------------------
+E2VID                       0.186                 0.189                 0.229
+E2VID+                      0.104                 0.132                 0.141
+FireNet                     0.150                 0.128                 0.125
+FireNet+                    0.048                 0.043                 0.045
+SPADE-E2VID                 0.087                 0.095                 0.099
+SSL-E2VID                   0.154                 0.178                 0.191
+ET-Net                      0.049                 0.044                 0.043
+HyperE2VID                  0.051                 0.046                 0.043
+['outdoor_night1_data', 'outdoor_night2_data', 'outdoor_night3_data']
+
+== Timing statistics ==
+E2VID: 28.53 ms (9418 samples)
+E2VID+: 28.89 ms (9418 samples)
+FireNet: 12.09 ms (9418 samples)
+FireNet+: 12.09 ms (9418 samples)
+SPADE-E2VID: 109.15 ms (9418 samples)
+SSL-E2VID: 29.08 ms (9418 samples)
+ET-Net: 933.66 ms (9418 samples)
+HyperE2VID: 48.68 ms (9418 samples)
+
+
+
+Image Quality Scores (for std_all config)
+               ECD (1855)    ECD (1855)    ECD (1855)    ECD (1855)    ECD (1855)    ECD (1855)    ECD (1855)
+Method                MSE           MSE           MSE           MSE           MSE           MSE           MSE
+-----------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
+E2VID               0.088         0.068         0.276         0.126         0.168         0.320         0.212
+E2VID+              0.031         0.041         0.142         0.040         0.070         0.089         0.042
+FireNet             0.093         0.066         0.230         0.109         0.136         0.156         0.118
+FireNet+            0.023         0.025         0.139         0.018         0.053         0.097         0.047
+SPADE-E2VID         0.083         0.056         0.154         0.062         0.112         0.064         0.107
+SSL-E2VID           0.048         0.068         0.093         0.029         0.114         0.164         0.092
+ET-Net              0.037         0.013         0.132         0.031         0.041         0.025         0.024
+HyperE2VID          0.023         0.011         0.089         0.014         0.035         0.019         0.029
+['calibration', 'boxes_6dof', 'dynamic_6dof', 'office_zigzag', 'poster_6dof', 'shapes_6dof', 'slider_depth']
+
+== Timing statistics ==
+E2VID: 16.60 ms (7031 samples)
+E2VID+: 16.54 ms (7031 samples)
+FireNet: 8.53 ms (7031 samples)
+FireNet+: 7.27 ms (7031 samples)
+SPADE-E2VID: 54.03 ms (7031 samples)
+SSL-E2VID: 16.68 ms (7031 samples)
+ET-Net: 72.75 ms (7031 samples)
+HyperE2VID: 25.19 ms (7031 samples)
+
+
+
+Image Quality Scores (for std_all config)
+               ECD_V2E (1855)    ECD_V2E (1855)    ECD_V2E (1855)    ECD_V2E (1855)    ECD_V2E (1855)    ECD_V2E (1855)    ECD_V2E (1855)    ECD_V2E (1855)
+Method                    MSE               MSE               MSE               MSE               MSE               MSE               MSE               MSE
+-----------  ----------------  ----------------  ----------------  ----------------  ----------------  ----------------  ----------------  ----------------
+E2VID                   0.112             0.077             0.124             0.145             0.075             0.375             0.163             0.153
+E2VID+                  0.132             0.129             0.159             0.157             0.163             0.198             0.173             0.157
+FireNet                 0.100             0.086             0.173             0.110             0.091             0.166             0.161             0.123
+FireNet+                0.150             0.120             0.205             0.181             0.159             0.244             0.171             0.176
+SPADE-E2VID             0.086             0.055             0.094             0.080             0.078             0.073             0.081             0.077
+SSL-E2VID               0.140             0.093             0.109             0.080             0.110             0.181             0.151             0.124
+ET-Net                  0.138             0.125             0.135             0.157             0.155             0.118             0.138             0.136
+HyperE2VID              0.095             0.083             0.121             0.120             0.117             0.114             0.113             0.107
+['calibration', 'boxes_6dof', 'dynamic_6dof', 'office_zigzag', 'poster_6dof', 'shapes_6dof', 'slider_depth']
+
+== Timing statistics ==
+E2VID: 17.14 ms (7031 samples)
+E2VID+: 16.42 ms (7031 samples)
+FireNet: 10.89 ms (7031 samples)
+FireNet+: 8.72 ms (7031 samples)
+SPADE-E2VID: 53.53 ms (7031 samples)
+SSL-E2VID: 16.37 ms (7031 samples)
+ET-Net: 56.96 ms (7031 samples)
+HyperE2VID: 24.56 ms (7031 samples)
+
+
+
+Image Quality Scores (for std_all config)
+               ECD_V2E (1855)
+Method                    MSE    SSIM    LPIPS
+-----------  ----------------  ------  -------
+E2VID                   0.153   0.242    0.575
+E2VID+                  0.157   0.202    0.562
+FireNet                 0.123   0.250    0.562
+FireNet+                0.176   0.144    0.572
+SPADE-E2VID             0.077   0.269    0.538
+SSL-E2VID               0.124   0.212    0.627
+ET-Net                  0.136   0.214    0.548
+HyperE2VID              0.107   0.215    0.542
+['calibration', 'boxes_6dof', 'dynamic_6dof', 'office_zigzag', 'poster_6dof', 'shapes_6dof', 'slider_depth']
+
+== Timing statistics ==
+E2VID: 16.42 ms (7031 samples)
+E2VID+: 16.33 ms (7031 samples)
+FireNet: 8.85 ms (7031 samples)
+FireNet+: 6.21 ms (7031 samples)
+SPADE-E2VID: 53.57 ms (7031 samples)
+SSL-E2VID: 16.35 ms (7031 samples)
+ET-Net: 56.55 ms (7031 samples)
+HyperE2VID: 24.59 ms (7031 samples)
